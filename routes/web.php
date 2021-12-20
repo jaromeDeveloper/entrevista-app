@@ -17,5 +17,4 @@ Route::get('/list/students','studentsController@index'); // List Students
 Route::get('/list/lessons','lessonsController@index');  // List lessons
 Route::get('/relationship/assign', 'studentsLessonsController@index'); // List Relationship students with lessons
 Route::post('/relationship/students/lessons/assign', 'studentsLessonsController@assign'); // Assign Relationship students with lessons
-Route::post('/relationship/students/lessons/remove', 'studentsLessonsController@remove'); // Remove Relationship students with lessons
 Route::post('/relationship/list/lessons/assign', 'studentsLessonsController@listLessonByStudent'); // List lesson by student

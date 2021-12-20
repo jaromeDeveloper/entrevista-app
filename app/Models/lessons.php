@@ -2,7 +2,6 @@
 
 namespace App\Models;
 use Illuminate\Support\Facades\DB;
-//use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class lessons extends Model
@@ -14,19 +13,6 @@ class lessons extends Model
         $arrLessons = $data['lessons'];
         for($z=0; $z<count( $arrLessons ); $z++ ){
             $mensaje = \DB::select("CALL sp_save_relationship_lessons_qry('".$pid."','".$arrLessons[$z]."' )"); // Save lessons asigned to student
-        }
-
-        $arrLessons = [];
-
-        return $mensaje;
-
-    }
-
-    public function removeByIdLessons($data){
-        $pid = $data['pid'];
-        $arrLessons = $data['lessons'];
-        for($z=0; $z<count( $arrLessons ); $z++ ){
-            $mensaje = \DB::select("CALL sp_remove_relationship_lessons_qry('".$pid."','".$arrLessons[$z]."' )"); // Save lessons asigned to student
         }
 
         $arrLessons = [];

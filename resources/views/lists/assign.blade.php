@@ -53,12 +53,6 @@
                 </select>
                 </div>
                 <!-- End Selected lessons --> 
-
-                 <!-- Button Remove lessons --> 
-                <div class="d-grid gap-2">
-                    <button type="button" id="remove" class="btn btn-danger btn-lg"> <i class="fas fa-arrow-left"></i> Remove </button>
-                </div>
-                 <!-- Button Remove lessons --> 
             </div>
 
         </div>
@@ -222,56 +216,6 @@
                 });
             }
 
-    </script>
-
-    <script>
-            document.getElementById('remove').addEventListener('click', function () {
-                var lessonsSelectedRemove = '';                
-                var optionsSelectedRemove = document.getElementById('idlesson_selected').selectedOptions;
-                lessonsSelectedRemove = Array.from(options).map(({ value }) => value);
-                // find row on array and remove
-                
-                fetch('http://localhost:8000/relationship/students/lessons/remove',{ // promise with vainilla, get value lessons Selected and No Selected by one student
-                            headers: { 
-                                "Content-Type": "application/json",
-                                "Accept": "application/json, text-plain, */*",
-                                "X-Requested-With": "XMLHttpRequest",
-                                "X-CSRF-TOKEN": csrfToken
-                                },
-                            method: 'post',
-                            body: JSON.stringify({
-                                    pid: pid,
-                                    lessons:lessonsSelectedRemove
-                            })
-                    }).then(function(response) {
-                        response.json().then(json => {  // response of the promise
-                        var message = Object.values(json);
-                            if( message[0][0]['Mensaje'] == 'Se elimino el registro'){
-                                //refresh list
-                                lessonsSelected = [];
-                                optionsLessonsSelected = '';
-                                optionsLessons = '';
-                                // clean list
-                                component = '<select class="form-select"  class="form-select lesson_select" name="lesson_select" id="idlesson_select" multiple style="height:245px;">'+''+'</select>'; // build string of component selected_lesson
-                                var elements = document.querySelectorAll('[id="select_lesson"]'); // select component lessons_select
-                                elements[0].innerHTML = component; // replace element select_lesson
-
-                                componentSelected = '<select class="form-select"  class="form-select lesson_select" name="lesson_select" id="idlesson_selected" multiple style="height:245px;">'+''+'</select>'; // build string of component selected_lesson
-                                var elementsSelected = document.querySelectorAll('[id="selected_lesson"]'); // selected component lessons_select
-                                elementsSelected[0].innerHTML = componentSelected; // replace element selected_lesson
-
-                                refreshList(pid); // refresh elements
-                                
-                                
-                            }
-
-                    });
-
-
-                    }).catch(function(error) {
-                        console.log(error);
-                    });
-            });
     </script>
     
 
